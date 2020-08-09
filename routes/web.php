@@ -16,13 +16,15 @@ Route::get('/postulacion', function () {
     return view('postulacion');
 });
 
-Route::get('/periodo', function () {
-    return view('periodo/creacion');
-});
+/* Ruta para el controlador BrigadistaController */
+Route::resource('/brigadista', 'BrigadistaController');
 
-Route::get('/modPeriodo', function () {
-    return view('periodo/modificacion');
-});
+/* Ruta para el controlador PostulacionController */
+Route::resource('/postulacion', 'PostulacionController');
+
+Route::get('/prueba', 'PostulacionController@getPostulantes');
+
+
 
 Route::get('/estado', function () {
     return view('estado');

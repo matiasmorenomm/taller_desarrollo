@@ -47,20 +47,21 @@ class periodoController extends Controller
         $periodo->fecha_inicio = $request->fecha_inicio;
         $periodo->fecha_fin = $request->fecha_fin;
 
+        if ($periodo->fecha_inicio < $periodo->fecha_fin) {
+            try {
+                $lab = $periodo->save();
+            } catch (\Throwable $th) {
+                $lab = 0;
+            }
 
 
-
-        try {
-            $lab = $periodo->save();
-        } catch (\Throwable $th) {
-            $lab = 0;
-        }
-
-
-        if($lab) {
-            return redirect('/periodo')->withToastSuccess('Periodo creado correctamente');
-        }else{
-            return redirect('/periodo')->withToastError('No se ha podido crear el periodo');
+            if ($lab) {
+                return redirect('/periodo')->withToastSuccess('Periodo creado correctamente');
+            } else {
+                return redirect('/periodo')->withToastError('No se ha podido crear el periodo');
+            }
+        } else {
+            return redirect('/periodo')->withToastError('La fecha de inicio no puede ser mayor a la fecha de fin');
         }
     }
 

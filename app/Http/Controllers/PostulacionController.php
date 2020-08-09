@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Postulacion;
 use Illuminate\Http\Request;
 
 class PostulacionController extends Controller
@@ -14,6 +15,14 @@ class PostulacionController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getPostulantes()
+    {
+        $periodo = 45;
+        $postulantes = Postulacion::where([['id_periodo', $periodo],['estado',454]])->get();
+
+        return view("postulantes",compact('postulantes'));
     }
 
     /**
